@@ -1,12 +1,19 @@
 function plot_blockers_sweep(varargin)
+% y1: Outage Probability
+% y2: ADR
+% x: transmitted Power (2 ~ 14)
+% @ Nb=2, 8, 20
     % --- Path & args ---
     thisFolder = fileparts(mfilename('fullpath'));
     addpath(genpath(thisFolder)); rehash;
 
     ip = inputParser;
-    ip.addParameter('nReal', 1000, @(x)isnumeric(x)&&isscalar(x)&&x>0);
+    % Monte Carlo realisation times
+    ip.addParameter('nReal', 1000, @(x)isnumeric(x)&&isscalar(x)&&x>0); 
     ip.addParameter('usePar', false, @(x)islogical(x)||isnumeric(x));
+    % transmitted Power (2, 4, 6, 8, 10, 12, 14)
     ip.addParameter('PtxVec', 2:2:14, @(x)isnumeric(x)&&isvector(x));
+    % Nb: Number of blockages
     ip.addParameter('NbList', [2 8 20], @(x)isnumeric(x)&&isvector(x)&&all(x>=0));
     ip.parse(varargin{:});
     OPT = ip.Results;

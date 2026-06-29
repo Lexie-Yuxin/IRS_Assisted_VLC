@@ -10,7 +10,7 @@ P.R_target      = 30e6;
 
 
 % 
-P.user_h = 1.2;                 % PD 高度
+P.user_h = 1.2;                 % PD Height
 user_x   = 2.5;             
 user_y   = 1.5;             
 U        = [user_x, user_y, P.user_h];

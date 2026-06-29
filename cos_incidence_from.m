@@ -1,9 +1,10 @@
 function c = cos_incidence_from(src_point, user_pos, alpha, beta)
-%COS_INCIDENCE_FROM  cos(xi): incidence at PD given a source at src_point and PD orientation (alpha,beta).
-%
-% src_point : 光源/反射点位置（AP、墙面、IRS tile 等）
-% user_pos  : 用户位置
-% alpha,beta: 用户设备（PD）姿态角
+% COS_INCIDENCE_FROM  
+% cos(xi): incidence at PD given a source at src_point and PD orientation (alpha,beta).
+
+% src_point : source（AP, wall, IRS tile, etc.）
+% user_pos  : User position
+% alpha,beta: Orientation of User's Device(PD)
 
     % 方向：用户 -> 光源/反射点
     v = src_point - user_pos;
@@ -14,12 +15,12 @@ function c = cos_incidence_from(src_point, user_pos, alpha, beta)
     end
     vhat = v / d;
 
-    % PD 法向（在用户坐标系下）
+    % PD normal
     n = [sin(alpha)*cos(beta), ...
          sin(alpha)*sin(beta), ...
          cos(alpha)];
 
-    % 入射角余弦：光线（用户->光源） 与 PD 法向的夹角
+    % cos of incident angle
     c = max(0, dot(vhat, n));
 end
 

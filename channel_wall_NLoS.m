@@ -1,5 +1,5 @@
 function G = channel_wall_NLoS(P, S)
-% First-order wall reflection (NLoS) per Eq. (4)
+% NLoS Gain: First-order wall reflection
 
     U  = S.user_pos;      
     AP = P.AP;            
@@ -8,9 +8,9 @@ function G = channel_wall_NLoS(P, S)
     acc = 0;
 
     for k = 1:K
-        wk = S.wall_tiles(k,:);   % 第 k 块墙面小块 [1x3]
+        wk = S.wall_tiles(k,:);   % the k-th wall tile [1x3]
 
-        % 距离
+        % distance
         d = norm(AP - U);
         da = norm(AP - wk);       % AP -> wall
         du = norm(U  - wk);       % wall -> user
@@ -18,30 +18,29 @@ function G = channel_wall_NLoS(P, S)
             continue;
         end
 
-        % 固定墙法向（指向房间内部）
-        n_wall = [0, -1, 0];      % 例如 y 轴向内
+        n_wall = [0, -1, 0];      
 
-        % ----- LED -> wall：Lambertian cos^m(Phi_a^k) -----
+        % LED -> wall:
         Phi_a_cos = cos_irradiance(AP, wk, P.m);
         if Phi_a_cos <= 0
-            continue;             % 这块墙不在 LED 主瓣内
+            continue;             % out of the main lobe of LED
         end
 
-        % ----- 入射到墙：cos(xi_a^k) -----
+        % Incident on wall
         dir_aw   = (AP - wk) / da;             % wall -> AP
         xi_a_cos = max(0, dot(dir_aw, n_wall));
         if xi_a_cos <= 0
             continue;
         end
 
-        % ----- 墙 -> 用户：cos(Phi_u^k) -----
+        % wall -> User:
         dir_wu   = (U - wk) / du;             % wall -> user
         Phi_u_cos = max(0, dot(dir_wu, n_wall));
         if Phi_u_cos <= 0
             continue;
         end
 
-        % ----- 用户端入射角 & FoV -----
+        % Incident angle on user side & FoV
         xi_u_cos = cos_incidence_from(wk, U, S.alpha, S.beta);
         if xi_u_cos <= 0
             continue;
@@ -52,7 +51,7 @@ function G = channel_wall_NLoS(P, S)
             continue;
         end
 
-        % ----- 单块墙面的 NLoS 增益（Eq. (4)） -----
+        % Contribution of a single wall tile NLoS
         term = P.wall.rho * ((P.m+1)*P.A_PD)/(2*pi^2*da^2*du^2) * d * S.tile_area * ...
                (Phi_a_cos.^P.m) * xi_a_cos * Phi_u_cos * xi_u_cos * P.T_opt * Gc;
 

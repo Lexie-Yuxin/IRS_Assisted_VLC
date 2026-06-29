@@ -1,6 +1,6 @@
 
 function plot_sca_convergence(P, S)
-% Plot SCA convergence: Achievable data rate (Eq. 7) vs iteration index.
+% Plot SCA convergence: Achievable data rate vs iteration index.
 % No change to sca_optimize.m needed.
 
 % ----- SCA params -----

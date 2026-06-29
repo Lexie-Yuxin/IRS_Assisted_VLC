@@ -11,10 +11,10 @@ P.user_body_r = 0.18;  % user body radius (self-block approx) (m)
 P.user_body_offset = 0.36; % PD distance from body center (m)
 
 % --- IRS panel (mirror array) on a wall ---
-P.IRS.Kx = 10;         % mirrors along x
-P.IRS.Ky = 30;         % mirrors along z (height)
+P.IRS.Kx = 30;         % mirrors along x
+P.IRS.Ky = 10;         % mirrors along z (height)
 P.IRS.tile = 0.1;      % mirror size (m)
-P.IRS.rho = 0.95;       % reflection coefficient ρ_IRS (0..1)
+P.IRS.rho = 0.95;       % reflection coefficient ρ_IRS
 % Place IRS on y = roomY wall, centered (x,z):
 P.IRS.wallY = P.roomY; 
 P.IRS.center = [P.roomX/2, P.IRS.wallY-1e-3, P.roomZ/2]; % tiny inset from wall to avoid zero distance
@@ -22,7 +22,7 @@ P.IRS.center = [P.roomX/2, P.IRS.wallY-1e-3, P.roomZ/2]; % tiny inset from wall 
 % --- Wall reflector (baseline) ---
 P.wall.rho = 0.6;      % wall reflection coefficient ρ_wall
 % Effective patching of the same footprint as IRS for fair comparison:
-P.wall.Kx = 10;  P.wall.Ky = 30;  P.wall.tile = 0.1; 
+P.wall.Kx = 30;  P.wall.Ky = 10;  P.wall.tile = 0.1; 
 P.wall.y = P.roomY-1e-3;
 
 % --- Photodetector / optics (Komine-Nakagawa model) ---
@@ -52,12 +52,12 @@ P.alpha_mu  = deg2rad(41);
 P.alpha_sig = deg2rad(9);   % Laplace std approx (rad)
 P.beta_minmax = [-pi, pi];
 
-% --- SCA optimizer ---
-P.SCA.N_agents = 10;
-P.SCA.T_max    = 50;       
+% SCA search optimizer
+P.SCA.N_agents = 12;
+P.SCA.T_max    = 20;       
 P.SCA.a        = 2;      % see r1 = a - t*(a/T)
 
 % --- Monte Carlo ---
-P.nRealizations = 500;
+P.nRealizations = 3000;
 P.verbose = true;
 end

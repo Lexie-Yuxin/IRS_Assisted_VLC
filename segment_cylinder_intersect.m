@@ -1,5 +1,6 @@
 function hit = segment_cylinder_intersect(p1, p2, c, r, zrange)
-%SEGMENT_CYLINDER_INTERSECT  Check if 3D segment [p1,p2] intersects a vertical cylinder.
+% SEGMENT_CYLINDER_INTERSECT  
+% Check if 3D segment [p1,p2] intersects a vertical cylinder.
 % Cylinder: infinite along z, centered at (c(1),c(2)), radius r; also require z-overlap with zrange=[zmin zmax].
 
 hit = false;

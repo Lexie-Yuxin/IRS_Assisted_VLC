@@ -1,5 +1,6 @@
 function Gc = concentrator_gain(P, xi_cos)
-%CONCENTRATOR_GAIN  Non-imaging concentrator gain with FoV clipping.
+% CONCENTRATOR_GAIN: Gc
+% Non-imaging concentrator gain with FoV clipping.
 
     % if xi <= P.FoV
     % Gc = (P.n_refr^2)/(sin(P.FoV)^2);
