@@ -68,7 +68,7 @@ xlabel('Iteration index');
 ylabel('Achievable data rate (bps)');
 
 legend('Location','southeast');
-title('SCA Convergence (Equation 7)');
+title('SCA Convergence');
 
 end
 

@@ -3,13 +3,14 @@ function plot_blockers_sweep(varargin)
 % y2: ADR
 % x: transmitted Power (2 ~ 14)
 % @ Nb=2, 8, 20
-    % --- Path & args ---
+
+    % Path & args
     thisFolder = fileparts(mfilename('fullpath'));
     addpath(genpath(thisFolder)); rehash;
 
     ip = inputParser;
     % Monte Carlo realisation times
-    ip.addParameter('nReal', 1000, @(x)isnumeric(x)&&isscalar(x)&&x>0); 
+    ip.addParameter('nReal', 100, @(x)isnumeric(x)&&isscalar(x)&&x>0); 
     ip.addParameter('usePar', false, @(x)islogical(x)||isnumeric(x));
     % transmitted Power (2, 4, 6, 8, 10, 12, 14)
     ip.addParameter('PtxVec', 2:2:14, @(x)isnumeric(x)&&isvector(x));
@@ -19,7 +20,7 @@ function plot_blockers_sweep(varargin)
     OPT = ip.Results;
     OPT.usePar = logical(OPT.usePar);
 
-    % --- Base params ---
+    % Base params
     Pbase = params();
     Pbase.verbose       = false;
     Pbase.R_target      = 30e6;     % outage threshold (bps)
@@ -135,7 +136,7 @@ function plot_blockers_sweep(varargin)
         end
     end
 
-    % ----- Figure 4: ADR vs power for different Nb -----
+    % Figure Plotting: ADR vs power for different Nb
     figure; hold on; grid on; box on;
     cmapIRS = lines(nNb);                % for IRS-aided
     cmapNoI = gray(nNb+2); cmapNoI = cmapNoI(2:end-1,:); % for no IRS (dashed)
@@ -151,7 +152,7 @@ function plot_blockers_sweep(varargin)
     legend('Location','northwest');
     set(gca,'FontSize',12,'LineWidth',1);
 
-    % ----- Figure 5: OP vs power for different Nb -----
+    % Figure: OP vs power for different Nb
     figure; hold on; grid on; box on;
     for ib = 1:nNb
         plot(PtxVec, OP_noI(ib,:),  '--s', 'Color', cmapNoI(ib,:), 'LineWidth',1.4, ...

@@ -53,8 +53,8 @@ P.alpha_sig = deg2rad(9);   % Laplace std approx (rad)
 P.beta_minmax = [-pi, pi];
 
 % SCA search optimizer
-P.SCA.N_agents = 12;
-P.SCA.T_max    = 20;       
+P.SCA.N_agents = 14;
+P.SCA.T_max    = 25;       
 P.SCA.a        = 2;      % see r1 = a - t*(a/T)
 
 % --- Monte Carlo ---

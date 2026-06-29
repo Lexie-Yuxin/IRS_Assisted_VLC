@@ -35,7 +35,7 @@ end
 fprintf('\nBlocker coordinates:\n');
 disp(S.blockers);
 
-% ====== 检查遮挡 ======
+% ====== Blocking check ======
 block_count = 0;
 for i = 1:P.N_blockers
     c = S.blockers(i,:);
