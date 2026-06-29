@@ -1,4 +1,4 @@
-# IRS/RIS-Aided Indoor Visible Light Communication Simulation Framework
+# IRS/RIS-Aided Indoor Visible Light Communication Simulation Framework RIS/IRS辅助的室内可见光通信仿真框架
 
 ## Overview
 This work provides a framework for indoor Intelligent Reconfigurable Surface-aided VLC systems.
@@ -16,18 +16,24 @@ This modell is inspired by S. Aboagye,etc. "Intelligent Reflecting Surface-Aided
 
 "generate_scenario.m" // Generate random scenes of the user's location, the number and location of obstructions, and the orientation of the device
 
-"cos_irradiance.m"
+"cos_irradiance.m" // Irradiance angle; "cos_incidence_from.m" // Incident angle
 
-"cos_incidence_from.m"
+"segment_cylinder_intersect.m" // For "debug_run.m"
 
-"segment_cylinder_intersect.m"
+"concentrator_gain.m" // Calculate concentrator gain 'Gc'
 
-"concentrator_gain.m"
+"check_blockage.m" // Check if there is any blockage on LoS path
 
+"channel_LoS.m", "channel_wall_NLoS.m", "channel_IRS_NLoS.m" // Channel Gains
+...
 
 ## run the simulation & Output figures
 
 'SCA Convergence' by "plot_sca_convergence.m", running code at the bottom
+
+"plot_power_sweep.m": OP and ADR of different surface optimization schemes
+
+"plot_blockers_sweep.m": OP and ADR under different numbers of obstructions
 
 ## Notes
 
